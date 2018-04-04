@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ovf:Envelope xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns="http://schemas.dmtf.org/ovf/envelope/1" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vmw="http://www.vmware.com/schema/ovf">
+  <References>
+    <File ovf:href="nsx-controller-6.4.0-build7552024-system.vmdk" ovf:size="763459584" ovf:id="nsx-controller-6.4.0-build7552024-system.vmdk_id"/>
+  </References>
+  <NetworkSection>
+    <Info>List of logical networks used in the package</Info>
+    <Network ovf:name="Network 1">
+      <Description>The "Network 1" network</Description>
+    </Network>
+  </NetworkSection>
+  <vmw:IpAssignmentSection ovf:required="false" vmw:protocols="IPv4,IPv6" vmw:schemes="">
+    <Info>Supported IP assignment schemes</Info>
+  </vmw:IpAssignmentSection>
+  <DiskSection>
+    <Info>List of the virtual disks and partitions needed</Info>
+    <Disk ovf:diskId="system" ovf:capacity="28672" ovf:capacityAllocationUnits="byte * 2^20" ovf:fileRef="nsx-controller-6.4.0-build7552024-system.vmdk_id" ovf:populatedSize="1597571072" ovf:format="http://www.vmware.com/interfaces/specifications/vmdk.html#streamOptimized"/>
+  </DiskSection>
+  <VirtualSystem ovf:id="NSX_Controller">
+    <Info>A virtual machine</Info>
+    <ProductSection ovf:required="false">
+      <Info>Appliance ISV branding information</Info>
+      <Product>NSX Controller</Product>
+      <Vendor>VMware Inc.</Vendor>
+      <!--
+            Version is the actual product version in the
+            form X.X.X.X where X is an unsigned 16-bit integer.
+
+            FullVersion is a descriptive version string
+            including, for example, alpha or beta designations
+            and other release criteria.
+        -->
+      <Version>6.4.0</Version>
+      <FullVersion>6.4.0 Build 7552024</FullVersion>
+      <ProductUrl/>
+      <VendorUrl>http://www.vmware.com</VendorUrl>
+      <AppUrl>https://${vami.ip0.NSX_Controller}:5480/</AppUrl>
+      <Category>Application</Category>
+      <Property ovf:key="management_ip" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+        <Label ovf:msgid="management_ip.label">Management IP Address</Label>
+        <Description ovf:msgid="management_ip.desc">IP address (A.B.C.D), or blank for DHCP.</Description>
+      </Property>
+      <Property ovf:key="netmask" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+        <Label ovf:msgid="netmask.label">Netmask for IP Address</Label>
+        <Description ovf:msgid="netmask.desc">Netmask for IP address (A.B.C.D), or blank for DHCP.</Description>
+      </Property>
+      <Property ovf:key="gateway_ip" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+        <Label ovf:msgid="gateway_ip.label">Gateway IP Address</Label>
+        <Description ovf:msgid="gateway_ip.desc">IP address (A.B.C.D), or blank for DHCP.</Description>
+      </Property>
+      <Property ovf:key="cluster_ip" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+        <Label ovf:msgid="cluster_ip.label">Cluster IP Address</Label>
+        <Description ovf:msgid="cluster_ip.desc">IP address (A.B.C.D), or ignore for not joinning cluser.</Description>
+      </Property>
+      <Property ovf:key="keystore" ovf:type="string" ovf:qualifiers="MaxLen(65535)" ovf:userConfigurable="true">
+        <Label ovf:msgid="keystore.label">Java keystore in BASE64</Label>
+        <Description ovf:msgid="keystore.desc">Java keystore file in BASE64</Description>
+      </Property>
+      <Property ovf:key="ipsec_key" ovf:type="string" ovf:qualifiers="MaxLen(65535)" ovf:userConfigurable="true">
+        <Label ovf:msgid="ipsec_key.label">IPSec pre-shared key in BASE64</Label>
+        <Description ovf:msgid="ipsec_key.desc">IPSec pre-shared key in BASE64</Description>
+      </Property>
+      <Property ovf:key="root_password" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+        <Label ovf:msgid="root_password.label">Password of root user in BASE64</Label>
+        <Description ovf:msgid="root_password.desc">Password of root user in BASE64</Description>
+      </Property>
+      <Property ovf:key="api_username" ovf:type="string" ovf:userConfigurable="true" ovf:value="admin">
+        <Label ovf:msgid="api_username.label">Username of API web service</Label>
+        <Description ovf:msgid="api_username.desc">Username of API web service</Description>
+      </Property>
+      <Property ovf:key="api_password" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+        <Label ovf:msgid="api_password.label">Password of API web service in BASE64</Label>
+        <Description ovf:msgid="api_password.desc">Password of API web service in BASE64</Description>
+      </Property>
+      <Property ovf:key="api_private_cert" ovf:type="string" ovf:qualifiers="MaxLen(65535)" ovf:userConfigurable="true">
+        <Label ovf:msgid="api_private_cert.label">Private cert of API web service in BASE64</Label>
+        <Description ovf:msgid="api_private_cert.desc">Private cert of API web service in BASE64</Description>
+      </Property>
+      <Property ovf:key="api_public_cert" ovf:type="string" ovf:qualifiers="MaxLen(65535)" ovf:userConfigurable="true">
+        <Label ovf:msgid="api_public_cert.label">Public cert of API web service in BASE64</Label>
+        <Description ovf:msgid="api_public_cert.desc">Public cert of API web service in BASE64</Description>
+      </Property>
+      <Property ovf:key="controller_id" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+        <Label ovf:msgid="controller_id.label">Unique controller ID in the cluster</Label>
+        <Description ovf:msgid="controller_id.desc">Unique controller ID in the cluster</Description>
+      </Property>
+      <Property ovf:key="ntp_servers" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+        <Label ovf:msgid="ntp_servers.label">NTP server list</Label>
+        <Description ovf:msgid="ntp_servers.desc">Comma separated list of NTP servers - Ipv4 address or complete hostnames</Description>
+      </Property>
+      <Property ovf:key="dns_server" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+        <Label ovf:msgid="dns_server.label">IP address of the DNS server of the controller</Label>
+        <Description ovf:msgid="dns_server.desc">IP address of the DNS server of the controller</Description>
+      </Property>
+      <Property ovf:key="dns_search_domain" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+        <Label ovf:msgid="dns_search_domain.label">DNS search domain of the controller</Label>
+        <Description ovf:msgid="dns_search_domain.desc">DNS search domain of the controller</Description>
+      </Property>
+      <Property ovf:key="build_number" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+        <Label ovf:msgid="build_number.label">Build number of old Ubuntu controller</Label>
+        <Description ovf:msgid="build_number.desc">Build number of old Ubuntu controller</Description>
+      </Property>
+    </ProductSection>
+    <ProductSection ovf:class="vami" ovf:instance="NSX_Controller" ovf:required="false">
+      <Info>VAMI Properties</Info>
+    </ProductSection>
+    <ProductSection ovf:class="vm" ovf:required="false">
+      <Info>VM specific properties</Info>
+    </ProductSection>
+    <AnnotationSection>
+      <Info/>
+      <Annotation/>
+    </AnnotationSection>
+    <OperatingSystemSection ovf:id="-100" ovf:version="1" vmw:osType="other3xLinux64Guest">
+      <Info>Guest Operating System</Info>
+      <Description>Photon OS </Description>
+    </OperatingSystemSection>
+    <VirtualHardwareSection ovf:transport="com.vmware.guestInfo" ovf:required="false">
+      <Info>Virtual Hardware Requirements</Info>
+      <System>
+        <vssd:ElementName>Virtual Hardware Family</vssd:ElementName>
+        <vssd:InstanceID>0</vssd:InstanceID>
+        <vssd:VirtualSystemType>vmx-08,vmx-09,vmx-10</vssd:VirtualSystemType>
+      </System>
+      <Item>
+        <rasd:AllocationUnits>hertz * 10^6</rasd:AllocationUnits>
+        <rasd:Description>Number of virtual CPUs</rasd:Description>
+        <rasd:ElementName xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData">4 virtual CPUs</rasd:ElementName>
+        <rasd:InstanceID xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData">1</rasd:InstanceID>
+        <rasd:Reservation>2</rasd:Reservation>
+        <rasd:ResourceType>3</rasd:ResourceType>
+        <rasd:VirtualQuantity>4</rasd:VirtualQuantity>
+      </Item>
+      <Item>
+        <rasd:AllocationUnits>byte * 2^20</rasd:AllocationUnits>
+        <rasd:Description>Memory Size</rasd:Description>
+        <rasd:ElementName xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData">4096 MB of memory</rasd:ElementName>
+        <rasd:InstanceID xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData">2</rasd:InstanceID>
+        <rasd:Reservation>1024</rasd:Reservation>
+        <rasd:ResourceType>4</rasd:ResourceType>
+        <rasd:VirtualQuantity>2048</rasd:VirtualQuantity>
+      </Item>
+      <Item>
+        <rasd:AutomaticAllocation>true</rasd:AutomaticAllocation>
+        <rasd:Connection>Network 1</rasd:Connection>
+        <rasd:ElementName xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData">Ethernet adapter on "Network 1"</rasd:ElementName>
+        <rasd:InstanceID xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData">3</rasd:InstanceID>
+        <rasd:ResourceSubType>vmxnet3</rasd:ResourceSubType>
+        <rasd:ResourceType>10</rasd:ResourceType>
+      </Item>
+      <Item>
+        <rasd:Address xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData">0</rasd:Address>
+        <rasd:ElementName xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData">SCSI Controller 0 - LSI Logic</rasd:ElementName>
+        <rasd:InstanceID xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData">4</rasd:InstanceID>
+        <rasd:ResourceSubType>lsilogic</rasd:ResourceSubType>
+        <rasd:ResourceType>6</rasd:ResourceType>
+      </Item>
+      <Item>
+        <rasd:AddressOnParent>0</rasd:AddressOnParent>
+        <rasd:ElementName xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData">Harddisk 1</rasd:ElementName>
+        <rasd:HostResource>ovf:/disk/system</rasd:HostResource>
+        <rasd:InstanceID xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData">5</rasd:InstanceID>
+        <rasd:Parent>4</rasd:Parent>
+        <rasd:ResourceType>17</rasd:ResourceType>
+      </Item>
+    </VirtualHardwareSection>
+  </VirtualSystem>
+</ovf:Envelope>

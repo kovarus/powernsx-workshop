@@ -1,8 +1,8 @@
 ﻿<#
-Script name: EnableVmotion.ps1 
-03/21/2018
-Author: Dana Gertsch
-Description: The purpose of the script is to enable VMotion on the nested hosts for our PowerCLI/NSX workshop
+Script name: Put your name here 
+Date: 
+Author: Who 
+Description: The purpose of the script is to ...
 Dependencies: None known
 
 ===Tested Against Environment====
@@ -13,13 +13,9 @@ PowerShell Version: 5.0
 OS Version: Windows 2012
 Keyword: VM
 #>
-$vcuser = "administrator@vsphere.local"
-$vcpassword = "VMware1!"
-$vcenter = "vcenter.corp.local"
 
 
 # Do not change anything below this line
-
 
 $StartTime = Get-Date
 
@@ -36,20 +32,11 @@ Function My-Logger {
 
 }
 
-My-Logger "Connecing to vCenter"
-# Connect to vCenter
-$vc = Connect-VIServer $vcenter -User $vcuser -Password $vcpassword
-$esxhosts = Get-VMHost
-foreach ($esxhost in $esxhosts) {
-# Get the Management Network VMK and enable VMotion
-    Get-VMHostNetworkAdapter -VMHost $esxhost -VMKernel | Set-VMHostNetworkAdapter -VMotionEnabled $true -Confirm:$false
-    My-Logger "Enabling VMotion on $esxhost"
- }
 
 $EndTime = Get-Date
 $duration = [math]::Round((New-TimeSpan -Start $StartTime -End $EndTime).TotalMinutes,2)
 
-My-Logger "vMotion conifgured on hosts."
+My-Logger "NSX Manager Deployment Complete!"
 My-Logger "StartTime: $StartTime"
 My-Logger "  EndTime: $EndTime"
 My-Logger " Duration: $duration minutes"
