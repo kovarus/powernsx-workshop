@@ -60,7 +60,8 @@ Connect-NsxServer -vCenterServer $vcenter -Username $vCenterUsername -Password $
 
 $MgmtCluster = Get-Cluster $MgmtClusterName
 $MgmtDatastore = Get-Datastore $MgmtDatastoreName
-$ManagementPortGroup = Get-VDPortgroup $ManagementPortGroupName
+$ManagementPortGroup = Get-VDPortgroup -Name vxw*
+# Should only be one
 
 # Check to see if the Controller Pool already exists
 My-Logger "Check for pre-existing NSX IPPool"

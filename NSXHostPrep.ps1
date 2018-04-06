@@ -53,11 +53,17 @@ Connect-NsxServer -vCenterServer $vcenter -Username $vCenterUsername -Password $
 $MgmtVds = Get-VDSwitch $ManagementvDSSwitchName
 $MmgtCluster = Get-Cluster "VSAN-Cluster"
 
-My-Logger "Creating new NSX ipPool"
-# Assumes we will run this before deploying the controller.
+# Check to see if the Controller Pool already exists
+My-Logger "Check for pre-existing NSX IPPool"
+if (Get-NsxIpPool -Name "Controller Pool") {
+    My-Logger "The Controller Pool already exists"
+} else {
+
+My-Logger "Creating IP Pool for Controller addressing"
 
 $ControllerPool = New-NsxIpPool -Name "Controller Pool" -Gateway $ManagementNetworkGateway -SubnetPrefixLength $ManagementNetworkSubnetPrefixLength -DnsServer1 $DnsServer1 -DnsSuffix $DnsSuffix -StartAddress $ControllerPoolStartIp -EndAddress $ControllerPoolEndIp
 
+}
 
 # Prep vxlan
 My-Logger "Creating vDS Context"
@@ -71,6 +77,8 @@ $MgmtVtepPool = Get-NsxIpPool -Name "Controller Pool"
 # Create new vxlan portgroup
 My-Logger "Prepping hosts in cluster"
 Get-Cluster $MgmtCluster | New-NsxClusterVxlanConfig -VirtualDistributedSwitch $MgmtVds -ipPool $MgmtVtepPool | out-null
+# Help Get-Cluster -Full
+# Hint missing -Name. The name is NOT $MgmtCluster.
 <#
 
 If you get something like "is in an inconsistent state UNINSTALLED" at this step, and you have uninstalled (deprepped) the hosts, make sure you put 
